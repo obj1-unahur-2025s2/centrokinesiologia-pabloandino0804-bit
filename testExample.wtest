@@ -1,8 +1,8 @@
 import example.*
 
-describe "Test parte 1" {
-  const leonardo = new Paciente(edad=40, nivelDolor=10, fortaleza=20)
-  const milena = new Paciente(edad=3, nivelDolor=30, fortaleza=50)
+describe "Tests parte 1" {
+  const leonardo = new Paciente(edad=40, nivelDolor=10, fortaleza=20, rutina = [magneto, bicicleta, minitramp])
+  const milena = new Paciente(edad=3, nivelDolor=30, fortaleza=50, rutina = [magneto, bicicleta])
   const magneto = new Magneto()
   const bicicleta = new Bicicleta()
   const minitramp = new Minitramp()
@@ -26,11 +26,29 @@ describe "Test parte 1" {
   test "Después de usar la bicicleta una vez, el nivel de dolor de Leonardo baja a 6, y la fortaleza sube a 23."{
     leonardo.usar(bicicleta)
     assert.equals(6, leonardo.nivelDolor())
-    assert.equals(24, leonardo.fortaleza())
+    assert.equals(23, leonardo.fortaleza())
   }
 
   test "Después de usar el minitramp una vez, la fortaleza de Leonardo sube a 24."{
-    milena.usar(minitramp)
-    assert.equals(24, milena.fortaleza())
+    leonardo.usar(minitramp)
+    assert.equals(24, leonardo.fortaleza())
+  }
+}
+
+describe "Tests parte 2" {
+  const leonardo = new Paciente(edad=40, nivelDolor=10, fortaleza=20, rutina = [magneto, bicicleta, minitramp])
+  const milena = new Paciente(edad=3, nivelDolor=30, fortaleza=50, rutina = [magneto, bicicleta])
+  const magneto = new Magneto()
+  const bicicleta = new Bicicleta()
+  const minitramp = new Minitramp()
+
+  test "Leonardo puede hacer la rutina que tiene asignada. Después de hacerla una vez, su nivel de dolor baja a 1.8, y su fortaleza sube a 30." {
+    leonardo.realizarRutina()
+    assert.equals(5, leonardo.nivelDolor())
+    assert.equals(30, leonardo.fortaleza())
+  }
+
+  test "Milena no puede hacer la rutina que tiene asignada." {
+    assert.notThat(milena.puedeRealizarLaRutina())
   }
 }
